@@ -1,37 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 
-const HomePage = () => {
-  return (
-    <section className="form">
-      <div className="container">
-        <div className="row no-gutters">
-          <div className="col-lg-5">
-            <img src="" className="img-fluid" alt="" />
-          </div>
-          <div className="col-lg-7 px-5 pt-5">
-            <h1 className="font-weight-bold">Logo</h1>
-            <h4>Please answer correctly</h4>
+import { userActions } from '../../nonFeature/_actions';
 
-            <div className="jumbotron">
-              <h1 className="display-4">Hello, world!</h1>
-              <p className="lead">
-                This is a simple hero unit, a simple jumbotron-style component
-                for calling extra attention to featured content or information.
-              </p>
-              <hr className="my-4" />
-              <p>
-                It uses utility classes for typography and spacing to space
-                content out within the larger container.
-              </p>
-              <a className="btn btn-primary btn-lg" href="#" role="button">
-                Learn more
-              </a>
+
+  const HomePage = (props) => {
+    //   const user = useSelector(state => state.user)
+      const dispatch = useDispatch();
+      const [loading, setLoading] = useState(false)
+      // const getUsers = () = dispatch(userActions)
+
+  useEffect(() => {
+    // getUsers();
+  }, [])
+
+
+   const handleDeleteUser = (id) => {
+        return (e) => deleteUser(id);
+    }
+
+    const[user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: ''
+      });
+
+      const[users, setUsers] = useState({
+        error: false,
+        loading: false,
+        items: []
+      });
+
+        return (
+            <div className="col-md-6 col-md-offset-3">
+                <h1>Hi {user.firstName}!</h1>
+                <p>You are logged in !</p>
+                <h3>All registered users:</h3>
+                {users.loading && <em>Loading users...</em>}
+                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
+                {users.items &&
+                    <ul>
+                        {users.items.map((user, index) =>
+                            <li key={user.id}>
+                                {user.firstName + ' ' + user.lastName}
+                                {
+                                    user.deleting ? <em> - Deleting...</em>
+                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
+                                    : <span> - <a onClick={handleDeleteUser(user.id)}>Delete</a></span>
+                                }
+                            </li>
+                        )}
+                    </ul>
+                }
+                <p>
+                    <Link to="/login">Logout</Link>
+                </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        );
+    
+}
 
-export default HomePage;
+
+export default HomePage
