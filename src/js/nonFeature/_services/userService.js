@@ -1,11 +1,10 @@
-import config from 'config';
+// import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const userService = {
     login,
     logout,
     register,
-    getAll,
     getById,
     update,
     delete: _delete
@@ -33,14 +32,6 @@ const logout = () => {
     localStorage.removeItem('user');
 }
 
-const getAll = () => {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
 
 const getById = (id) => {
     const requestOptions = {

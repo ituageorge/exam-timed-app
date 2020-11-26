@@ -37,19 +37,7 @@ export const configureFakeBackend = () => {
                     return;
                 }
 
-                // get users
-                if (url.endsWith('/users') && opts.method === 'GET') {
-                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                    if (opts.headers && opts.headers.Authorization === 'Bearer fake-jwt-token') {
-                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(users))});
-                    } else {
-                        // return 401 not authorised if token is null or invalid
-                        reject('Unauthorised');
-                    }
-
-                    return;
-                }
-
+               
                 // get user by id
                 if (url.match(/\/users\/\d+$/) && opts.method === 'GET') {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
