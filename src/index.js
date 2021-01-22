@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import {store} from './js/nonFeature/_helpers/store';
 
 import App from './router/AppRouter';
+import './styles.css'
 
 //setup fake backend
 

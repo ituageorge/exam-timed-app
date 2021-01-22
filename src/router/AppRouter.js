@@ -24,8 +24,10 @@ const App = () => {
 
  
       return (
-          <div className="jumbotron">
-              <div className="container">
+        //   <div className="jumbotron">
+              <div className="">
+              {/* <div className="container"> */}
+            
                   {/* <h1>Exam Timed App</h1> */}
                   
                       {alert.message &&
@@ -42,7 +44,7 @@ const App = () => {
                       </Router>
                   
               </div>
-          </div>
+        //   </div>
       );
   }
 

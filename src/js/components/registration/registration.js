@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {userActions} from '../../nonFeature/_actions';
+import {userActions} from '../../nonFeature/_actions/userActions';
 
- export const RegistrationForm = () => {
+export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -18,9 +18,9 @@ import {userActions} from '../../nonFeature/_actions';
   const registering = useSelector((state) => state.registration.registering);
 
   // reset login status
-//   useEffect(() => {
-//     dispatch(userActions.logout());
-//   }, []);
+    // useEffect(() => {
+    //   dispatch(userActions.logout());
+    // }, []);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -31,8 +31,11 @@ import {userActions} from '../../nonFeature/_actions';
     e.preventDefault();
     setSubmitted(true);
     if (user.firstName && user.lastName && user.username && user.password) {
-      dispatch(userAction.register(user));
+      dispatch(userActions.register(user));
     }
+    
+    
+   
   };
 
   return (
@@ -122,13 +125,21 @@ import {userActions} from '../../nonFeature/_actions';
                   <div className="help-block">Password is required</div>
                 )}
               </div>
-              <div className="form-row col-lg-7">
+
+              <div
+                className={
+                  'form-group col-lg-7' +
+                  (submitted && !user ? ' has-error' : '')
+                }
+              >
+                <label htmlFor="username">Your passport</label>
                 <input
                   type="file"
                   accept="image/*"
                   name="image"
                   id="file"
                   className="form-control my-3 "
+                  placeholder="please upload your image"
                 />
               </div>
 
@@ -150,5 +161,3 @@ import {userActions} from '../../nonFeature/_actions';
     </section>
   );
 };
-
-
