@@ -6,6 +6,7 @@ export const userService = {
     logout,
     register,
     getById,
+    getAll,
     update,
     delete: _delete
 };
@@ -30,6 +31,15 @@ const login = (username, password) => {
 const logout = () => {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+}
+
+const getAll = () => {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
 

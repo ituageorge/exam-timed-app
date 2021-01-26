@@ -18,9 +18,9 @@ export const RegistrationForm = () => {
   const registering = useSelector((state) => state.registration.registering);
 
   // reset login status
-    // useEffect(() => {
-    //   dispatch(userActions.logout());
-    // }, []);
+  // useEffect(() => {
+  //   dispatch(userActions.logout());
+  // }, []);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -33,9 +33,6 @@ export const RegistrationForm = () => {
     if (user.firstName && user.lastName && user.username && user.password) {
       dispatch(userActions.register(user));
     }
-    
-    
-   
   };
 
   return (
@@ -146,6 +143,9 @@ export const RegistrationForm = () => {
               <div className="form-row">
                 <div className="col-lg-7">
                   <button type="button" className="btn1 btn1 mt-3 mb-5">
+                    {registering && (
+                      <span className="spinner-border spinner-border-sm mr-1"></span>
+                    )}
                     Register
                   </button>
                 </div>

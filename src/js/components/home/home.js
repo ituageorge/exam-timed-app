@@ -7,7 +7,12 @@ import {QuestionApp} from '../question';
 
 const HomePage = () => {
   const user = useSelector((state) => state.authentication.user);
+  const users = useSelector(state => state.users)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userActions.getAll());
+}, []);
 
   return (
     <div className="col-md-6 col-md-offset-3">

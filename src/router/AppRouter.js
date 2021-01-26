@@ -39,7 +39,7 @@ const App = () => {
                               <PrivateRoute exact path="/" component={HomePage} />
                               <Route path="/login" component={LoginForm} />
                               <Route path="/registration" component={RegistrationForm} />
-                              <Redirect from="*" to="/" />
+                              {/* <Redirect from="*" to="/" /> */}
                           </Switch>
                       </Router>
                   

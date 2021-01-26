@@ -28,7 +28,7 @@ const LoginForm = () => {
     setSubmitted(true);
     if (username && password) {
       // this is to return url from location state or default to home page
-      const {from} = location.state || {from: {pathname: '/'}};
+      const {from} = location.state || {from: {pathname: '/home'}};
       dispatch(userActions.login(username, password, from));
     }
   };
@@ -84,6 +84,7 @@ const LoginForm = () => {
               </div>
               <div className="form-row col-lg-7">
                 <button type="button" className="btn1 btn1 mt-3 mb-5">
+                {loggingIn && <span className="spinner-border spinner-border-sm mr-1"></span>}
                   Login
                 </button>
                 {/* {loggingIn && <img src=""/>} */}

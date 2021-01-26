@@ -11,7 +11,7 @@ export const userActions = {
     delete: _delete
 };
 
-const login = (username, password) => {
+const login = (username, password, from) => {
     return dispatch => {
         dispatch(request({ username }));
 
@@ -19,7 +19,7 @@ const login = (username, password) => {
             .then(
                 user => { 
                     dispatch(success(user));
-                    history.push('/');
+                    history.push(from);
                 },
                 error => {
                     dispatch(failure(error.toString()));
