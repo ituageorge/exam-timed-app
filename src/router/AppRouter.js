@@ -36,7 +36,7 @@ const App = () => {
                       <Router history={history}>
                       
                           <Switch>
-                              <PrivateRoute exact path="/" component={HomePage} />
+                              <PrivateRoute exact path="/home" component={HomePage} />
                               <Route path="/login" component={LoginForm} />
                               <Route path="/registration" component={RegistrationForm} />
                               {/* <Redirect from="*" to="/" /> */}

@@ -83,7 +83,7 @@ const LoginForm = () => {
                 )}
               </div>
               <div className="form-row col-lg-7">
-                <button type="button" className="btn1 btn1 mt-3 mb-5">
+                <button className="btn1 btn1 mt-3 mb-5">
                 {loggingIn && <span className="spinner-border spinner-border-sm mr-1"></span>}
                   Login
                 </button>

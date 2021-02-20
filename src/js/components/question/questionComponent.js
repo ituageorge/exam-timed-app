@@ -40,10 +40,11 @@ export const QuestionApp = () => {
             </div>
           </div>
           <div className="answer-section">
-            {questions[currentQuestion].answerOptions.map((answerOption) => (
+            {questions[currentQuestion].answerOptions.map((answerOption, index) => (
               // <div className="" key={uuid()}>
               <button
                 onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+                key={index}
               >
                 {answerOption.answerText}
               </button>

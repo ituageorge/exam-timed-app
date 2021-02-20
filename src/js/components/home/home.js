@@ -10,9 +10,9 @@ const HomePage = () => {
   const users = useSelector(state => state.users)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(userActions.getAll());
-}, []);
+//   useEffect(() => {
+//     dispatch(userActions.getAll());
+// }, []);
 
   return (
     <div className="col-md-6 col-md-offset-3">

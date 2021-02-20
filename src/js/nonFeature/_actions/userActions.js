@@ -2,6 +2,7 @@ import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
+import { HomePage } from '../../components/home';
 
 export const userActions = {
     login,
@@ -11,7 +12,7 @@ export const userActions = {
     delete: _delete
 };
 
-const login = (username, password, from) => {
+function login(username, password, from){
     return dispatch => {
         dispatch(request({ username }));
 
@@ -20,6 +21,7 @@ const login = (username, password, from) => {
                 user => { 
                     dispatch(success(user));
                     history.push(from);
+                    
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -33,12 +35,12 @@ const login = (username, password, from) => {
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
-const logout = () => {
+function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
 }
 
-const register = (user) => {
+function register(user) {
     return dispatch => {
         dispatch(request(user));
 
@@ -61,7 +63,8 @@ const register = (user) => {
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-const getAll = () => {
+
+function getAll() {
     return dispatch => {
         dispatch(request());
 

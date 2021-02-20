@@ -11,7 +11,7 @@ export const userService = {
     delete: _delete
 };
 
-const login = (username, password) => {
+function login(username, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,12 +28,12 @@ const login = (username, password) => {
         });
 }
 
-const logout = () => {
+function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
 }
 
-const getAll = () => {
+function getAll() {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -43,7 +43,7 @@ const getAll = () => {
 }
 
 
-const getById = (id) => {
+function getById(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -52,7 +52,7 @@ const getById = (id) => {
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 
-const register = (user) => {
+function register(user){
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -62,7 +62,7 @@ const register = (user) => {
     return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
-const update = (user) => {
+function update(user) {
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
@@ -73,7 +73,7 @@ const update = (user) => {
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-const _delete = (id) => {
+function _delete(id) {
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader()
@@ -82,7 +82,7 @@ const _delete = (id) => {
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 
-const handleResponse = (response) => {
+function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {

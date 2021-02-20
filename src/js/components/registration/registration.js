@@ -12,20 +12,27 @@ export const RegistrationForm = () => {
     lastName: '',
     username: '',
     password: '',
+    user_image: ''
   });
   const [submitted, setSubmitted] = useState(false);
 
   const registering = useSelector((state) => state.registration.registering);
 
   // reset login status
-  // useEffect(() => {
-  //   dispatch(userActions.logout());
-  // }, []);
+  useEffect(() => {
+    dispatch(userActions.logout());
+  }, []);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
+    
     setUser((user) => ({...user, [name]: value}));
   };
+
+  // const handleChangeUserImage = (e) => {
+  //   setUser({ user_image: e.target.files[0] })
+  // }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +43,7 @@ export const RegistrationForm = () => {
   };
 
   return (
+    // <form name="form" onSubmit={handleSubmit}>
     <section className="form">
       <div className="container">
         <div className="row no-gutters">
@@ -133,8 +141,10 @@ export const RegistrationForm = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  name="image"
-                  id="file"
+                  name="userImage"
+                  value={user.user_image}
+                  onChange={handleChange}
+                  // id="file"
                   className="form-control my-3 "
                   placeholder="please upload your image"
                 />
@@ -142,7 +152,7 @@ export const RegistrationForm = () => {
 
               <div className="form-row">
                 <div className="col-lg-7">
-                  <button type="button" className="btn1 btn1 mt-3 mb-5">
+                  <button type="submit"  className="btn1 btn1 mt-3 mb-5">
                     {registering && (
                       <span className="spinner-border spinner-border-sm mr-1"></span>
                     )}
@@ -159,5 +169,6 @@ export const RegistrationForm = () => {
         </div>
       </div>
     </section>
+    // {/* </form> */}
   );
 };
