@@ -3,6 +3,9 @@ import {Link, useLocation} from 'react-router-dom';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 
 import {userActions} from '../../nonFeature/_actions';
+import { history } from '../../nonFeature/_helpers';
+
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,12 @@ const LoginForm = () => {
   const loggingIn = useSelector((state) => state.authentication.loggingIn);
   const location = useLocation();
 
+  
+    // useEffect(() => {
+    //   //  userActions
+      
+    // }, [loggingIn]);
+
   const handleChange = (event) => {
     const {name, value} = event.target;
     setInputs((inputs) => ({...inputs, [name]: value}));
@@ -28,10 +37,29 @@ const LoginForm = () => {
     setSubmitted(true);
     if (username && password) {
       // this is to return url from location state or default to home page
-      const {from} = location.state || {from: {pathname: '/home'}};
+      const {from} = location.state || {from: {pathname: '/'}};
+      // const {from} =  {from: {pathname: '/'}};
+      
+
+      
       dispatch(userActions.login(username, password, from));
+      // window.location.reload(false);
     }
   };
+
+  
+
+   // reset login status
+   useEffect(() => {
+    // dispatch(userActions.logout());
+    // window.location.reload(true);
+
+    if (history.location.state && history.location.state.transaction) {
+      let state = { ...history.location.state };
+      delete state.transaction;
+      history.replace({ ...history.location, state });
+  }
+  }, []);
 
   return (
     <section className="form">
@@ -92,7 +120,7 @@ const LoginForm = () => {
               <a href="#">Forgot password</a>
               <p>
                 Don't have an account?
-                <Link to="/registration">Register here</Link>
+                <Link to="/register">Register here</Link>
               </p>
             </form>
           </div>

@@ -2,7 +2,6 @@ import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
-import { HomePage } from '../../components/home';
 
 export const userActions = {
     login,
@@ -21,7 +20,7 @@ function login(username, password, from){
                 user => { 
                     dispatch(success(user));
                     history.push(from);
-                    
+                    location.reload()
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -49,6 +48,7 @@ function register(user) {
                 user => { 
                     dispatch(success(user));
                     history.push('/login');
+                    location.reload()
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {

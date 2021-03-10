@@ -12,7 +12,7 @@ import { alertActions } from '../js/nonFeature/_actions';
 
 
 
-const App = () => {
+function App() {
     const alert = useSelector(state => state.alert);
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const App = () => {
         history.listen((location, action) => {
             dispatch(alertActions.clear());
         });
-    }, []);
+    }, [history]);
 
  
       return (
@@ -36,10 +36,11 @@ const App = () => {
                       <Router history={history}>
                       
                           <Switch>
-                              <PrivateRoute exact path="/home" component={HomePage} />
+                              <PrivateRoute exact path="/" component={HomePage} />
                               <Route path="/login" component={LoginForm} />
-                              <Route path="/registration" component={RegistrationForm} />
-                              {/* <Redirect from="*" to="/" /> */}
+                              <Route path="/register" component={RegistrationForm} />
+                              <Redirect from="*" to="/login" />
+                              
                           </Switch>
                       </Router>
                   
@@ -47,5 +48,7 @@ const App = () => {
         //   </div>
       );
   }
+
+  
 
 export default App;

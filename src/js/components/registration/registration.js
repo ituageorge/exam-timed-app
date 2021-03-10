@@ -12,16 +12,13 @@ export const RegistrationForm = () => {
     lastName: '',
     username: '',
     password: '',
-    user_image: ''
+    profileImg: ''
   });
   const [submitted, setSubmitted] = useState(false);
 
   const registering = useSelector((state) => state.registration.registering);
 
-  // reset login status
-  useEffect(() => {
-    dispatch(userActions.logout());
-  }, []);
+ 
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -29,9 +26,9 @@ export const RegistrationForm = () => {
     setUser((user) => ({...user, [name]: value}));
   };
 
-  // const handleChangeUserImage = (e) => {
-  //   setUser({ user_image: e.target.files[0] })
-  // }
+  const onFileChange = (e) => {
+    setUser({ profileImg: e.target.files[0] })
+  }
 
 
   const handleSubmit = (e) => {
@@ -41,6 +38,11 @@ export const RegistrationForm = () => {
       dispatch(userActions.register(user));
     }
   };
+
+   // reset login status
+  useEffect(() => {
+    dispatch(userActions.logout());
+  }, []);
 
   return (
     // <form name="form" onSubmit={handleSubmit}>
@@ -137,14 +139,13 @@ export const RegistrationForm = () => {
                   (submitted && !user ? ' has-error' : '')
                 }
               >
-                <label htmlFor="username">Your passport</label>
+                <label htmlFor="userImage">Your passport</label>
                 <input
                   type="file"
                   accept="image/*"
-                  name="userImage"
-                  value={user.user_image}
-                  onChange={handleChange}
-                  // id="file"
+                  filename="profileImg"
+                  // value={user.profileImg}
+                  onChange={onFileChange}
                   className="form-control my-3 "
                   placeholder="please upload your image"
                 />
@@ -172,3 +173,6 @@ export const RegistrationForm = () => {
     // {/* </form> */}
   );
 };
+
+
+  // onChange={this.handleImageChange}
